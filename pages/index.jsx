@@ -1,19 +1,20 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Post from "../components/Post";
 
 export default function Home({ posts }) {
   return (
     <>
       <h1>Hello</h1>
       {posts.map((p, i) => (
-        <h2 key={i}>{p.frontmatter.title}</h2>
+        <Post key={i} post={p} />
       ))}
     </>
   );
 }
 
-export const getStaticProps = () => {
+export function getStaticProps() {
   // Leer los archivos de la carpeta posts
   const files = fs.readdirSync(path.join("posts"));
 
@@ -24,7 +25,6 @@ export const getStaticProps = () => {
 
     // Obtener el frontmatter
     const markdownWithMeta = fs.readFileSync(path.join("posts", f), "utf-8");
-
     const { data: frontmatter } = matter(markdownWithMeta);
 
     return {
@@ -33,9 +33,14 @@ export const getStaticProps = () => {
     };
   });
 
+  // Ordenar por fecha
+  const sortByDate = (a, b) => {
+    return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
+  };
+
   return {
     props: {
-      posts,
+      posts: posts.sort(sortByDate),
     },
   };
 };
