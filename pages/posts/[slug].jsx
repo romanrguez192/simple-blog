@@ -2,16 +2,20 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import marked from "marked";
+import Meta from "../../components/Meta";
 
 export default function Post({
-  frontmatter: { title, date, cover_image },
-  slug,
-  content,
+  title,
+  date,
+  cover_image,
+  excerpt,
+  htmlString,
 }) {
   return (
     <>
+      <Meta title={title} description={excerpt} />
       <h1>{title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+      <div dangerouslySetInnerHTML={{ __html: htmlString }}></div>
     </>
   );
 }
@@ -31,7 +35,7 @@ export function getStaticPaths() {
     paths,
     fallback: false,
   };
-};
+}
 
 export function getStaticProps({ params: { slug } }) {
   // Leer el markdown de los archivos
@@ -41,13 +45,20 @@ export function getStaticProps({ params: { slug } }) {
   );
 
   // Obtener el frontmatter y el contenido
-  const { data: frontmatter, content } = matter(markdownWithMeta);
+  const {
+    data: { title, excerpt, date, cover_image },
+    content,
+  } = matter(markdownWithMeta);
+
+  const htmlString = marked(content);
 
   return {
     props: {
-      frontmatter,
-      slug,
-      content,
+      title,
+      excerpt,
+      date,
+      cover_image,
+      htmlString,
     },
   };
-};
+}
