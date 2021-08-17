@@ -1,14 +1,14 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Post from "../components/Post";
+import PostItem from "../components/PostItem";
 
 export default function Home({ posts }) {
   return (
     <>
       <h1>Hello</h1>
       {posts.map((p, i) => (
-        <Post key={i} post={p} />
+        <PostItem key={i} post={p} />
       ))}
     </>
   );
