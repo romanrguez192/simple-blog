@@ -2,12 +2,13 @@ import Link from "next/link";
 
 export default function Post({ post }) {
   return (
-    <>
-      <h1>{post.frontmatter.title}</h1>
+    <div className="post">
+      <h2>{post.frontmatter.title}</h2>
+      <p>{post.frontmatter.date}</p>
       <p>{post.frontmatter.excerpt}</p>
       <Link href={"/posts/" + post.slug}>
-        <a>Go to</a>
+        <a className="btn">Read more</a>
       </Link>
-    </>
+    </div>
   );
 }

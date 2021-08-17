@@ -5,12 +5,13 @@ import PostItem from "../components/PostItem";
 
 export default function Home({ posts }) {
   return (
-    <>
-      <h1>Hello</h1>
-      {posts.map((p, i) => (
-        <PostItem key={i} post={p} />
-      ))}
-    </>
+    <div className="container">
+      <div className="posts">
+        {posts.map((p, i) => (
+          <PostItem key={i} post={p} />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -43,4 +44,4 @@ export function getStaticProps() {
       posts: posts.sort(sortByDate),
     },
   };
-};
+}

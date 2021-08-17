@@ -4,12 +4,14 @@ import matter from "gray-matter";
 import marked from "marked";
 import Meta from "../../components/Meta";
 
-export default function Post({ title, date, cover_image, excerpt, markdown }) {
+export default function Post({ title, date, excerpt, htmlString }) {
   return (
-    <>
+    <div className="container post post-page">
       <Meta title={title} description={excerpt} />
-
-    </>
+      <h1>{title}</h1>
+      <p>Posted on {date}</p>
+      <div dangerouslySetInnerHTML={{ __html: htmlString }}></div>
+    </div>
   );
 }
 
@@ -39,17 +41,18 @@ export function getStaticProps({ params: { slug } }) {
 
   // Obtener el frontmatter y el contenido
   const {
-    data: { title, excerpt, date, cover_image },
-    content: markdown,
+    data: { title, excerpt, date },
+    content,
   } = matter(markdownWithMeta);
+
+  const htmlString = marked(content);
 
   return {
     props: {
       title,
       excerpt,
       date,
-      cover_image,
-      markdown,
+      htmlString,
     },
   };
 }

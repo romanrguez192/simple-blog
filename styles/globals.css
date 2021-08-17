@@ -1,16 +1,92 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+p {
+  margin: 1em 0;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: #333;
+  padding: 0.75em 2em;
+  margin-bottom: 2em;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.2);
+}
+
+header a {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 1.5em;
+  overflow: auto;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+.post {
+  padding: 1em;
+  border-radius: 0.75em;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.2);
+}
+
+.post-page {
+  padding: 2em;
+  margin-bottom: 2em;
+}
+
+.btn {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  background: #444;
+  transform: scale(0.98);
+}
+
+ul, ol {
+  line-height: 2.3;
+  margin: 0.75em 1.5em;
+}
+
+pre {
+  padding: 1.25em;
+  margin: 1.25em 0;
+  line-height: 2.3;
+}
+
+@media (max-width: 600px) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
 }
