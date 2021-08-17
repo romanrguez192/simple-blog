@@ -15,7 +15,7 @@ export default function Home({ posts }) {
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   // Leer los archivos de la carpeta posts
   const files = fs.readdirSync(path.join("posts"));
 

@@ -15,7 +15,7 @@ export default function Post({ title, date, excerpt, htmlString }) {
   );
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   // Leer los archivos de la carpeta posts
   const files = fs.readdirSync(path.join("posts"));
 
@@ -32,7 +32,7 @@ export function getStaticPaths() {
   };
 }
 
-export function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
   // Leer el markdown de los archivos
   const markdownWithMeta = fs.readFileSync(
     path.join("posts", slug + ".md"),
